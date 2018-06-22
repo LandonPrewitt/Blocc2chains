@@ -4,10 +4,10 @@ var express = require('express'),
     app = express(),
     fs = require('fs'),
     http = require('http').Server(app),
-    io = require('socket.io')(http);
+    io = require('socket.io')(http),
     path = require('path');
 
-app.listen(3000, () => console.log('App on port 3000'))
+//app.listen(3000, () => console.log('App on port 3000'))
 
 app.use(express.static('/public'))
 
@@ -22,7 +22,7 @@ app.get('/main.css', function (req,res) {
 })
 
 app.get('/main.js', function (req,res) {
-  res.sendFile(path.join(__dirname + '/main.js'))
+  res.sendFile(path.join(__dirname + '/public/main.js'))
 })
 
 // ================= IO Interaction Logic ===============
@@ -38,4 +38,9 @@ io.on('connection', function(socket) {
     console.log('user disconnected');
   });
 
+})
+
+
+http.listen(3000, function() {
+  console.log('listening on *:3000');
 })
