@@ -1,0 +1,25 @@
+
+* How to create a pull request:
+First install hub: "brew install hub"
+Ex: hub pull-request -h landon -m "Testing assigned pr" -a asadw1
+-h => branch pulling from
+-m => message
+-a => Assigned to
+
+* How to check current branch
+git branch
+
+* How to create a new branch
+git branch new_branch_name
+
+* How to switch branches
+git checkout branch_name
+
+* Check what is ready to be pushed & Different from branch
+Ex: git diff --stat --cached branch_name
+
+* Check what is ready to be pushed in current branch
+Ex: git diff --stat --cached HEAD^
+
+* Roll-back a commit
+Ex: git reset --softgit  HEAD^
