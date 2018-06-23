@@ -7,6 +7,7 @@ jQuery(function($){
 	var $sendBtn = $('#send_message');
 	var $msg = $('.message_input');
 	var $msgList = $('.messages');
+	var $title = $('.title');
 
 	// Functions
 	function sendMessage() {
@@ -37,6 +38,10 @@ jQuery(function($){
 
 	socket.on('newMsg', function(data) {
 		$msgList.append('<li>' + data + '</li>');
+	});
+
+	socket.on('updateUserCount', function(data) {
+		$title.text("Chat - " + data + " Online");
 	});
 
 

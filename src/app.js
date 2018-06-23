@@ -8,7 +8,8 @@ var express = require('express'),
       pingTimeout: 5000
     }),
     path = require('path'),
-    count = 0;
+    count = 0,
+    connect_count = 0;
 
 //app.listen(3000, () => console.log('App on port 3000'))
 
@@ -28,15 +29,25 @@ app.get('/main.js', function (req,res) {
   res.sendFile(path.join(__dirname + '/public/main.js'))
 })
 
+// ================= IO Shortcut / Functions
+
+function updateUserCount() {
+  io.sockets.emit('updateUserCount', connect_count);
+  console.log(connect_count);
+}
+
 // ================= IO Interaction Logic ===============
 
 io.on('connection', function(socket) {
+  
+  // Initial Connection Code
   console.log('user connected');  
+  connect_count++;
+  updateUserCount();
+  console.log(connect_count);
 
   // Assign an ID
   socket.nickname = count;
-  count++;
-  console.log(count);
 
   socket.on('chat message', function(msg) {
     io.emit('chat message', msg);
@@ -44,6 +55,8 @@ io.on('connection', function(socket) {
 
   socket.on('disconnect', function() {
     console.log('user disconnected');
+    connect_count--;
+    updateUserCount();
   });
 
   socket.on('sendMsg', function(data) {
