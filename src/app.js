@@ -38,6 +38,11 @@ io.on('connection', function(socket) {
     console.log('user disconnected');
   });
 
+  socket.on('sendMsg', function(data, callback) {
+    var msg = data.trim();
+    callback(msg);
+  });
+
 })
 
 
