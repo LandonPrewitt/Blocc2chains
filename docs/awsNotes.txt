@@ -1,0 +1,14 @@
+* Re-route port 80 to your choide:
+sudo iptables -A PREROUTING -t nat -i eth0 -p tcp --dport 80 -j REDIRECT --to-port 9000
+
+* Connect to the amazon ssh
+ssh -i (key file) ubuntu@ec2-server-addr
+
+* run app in background 
+nohup node app.js &
+
+* Get process id's
+pwd
+
+* Kill the process
+kill pid
