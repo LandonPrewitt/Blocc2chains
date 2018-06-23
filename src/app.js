@@ -4,8 +4,11 @@ var express = require('express'),
     app = express(),
     fs = require('fs'),
     http = require('http').Server(app),
-    io = require('socket.io')(http),
-    path = require('path');
+    io = require('socket.io')(http, {
+      pingTimeout: 5000
+    }),
+    path = require('path'),
+    count = 0;
 
 //app.listen(3000, () => console.log('App on port 3000'))
 
@@ -30,6 +33,11 @@ app.get('/main.js', function (req,res) {
 io.on('connection', function(socket) {
   console.log('user connected');  
 
+  // Assign an ID
+  socket.nickname = count;
+  count++;
+  console.log(count);
+
   socket.on('chat message', function(msg) {
     io.emit('chat message', msg);
   });
@@ -38,9 +46,11 @@ io.on('connection', function(socket) {
     console.log('user disconnected');
   });
 
-  socket.on('sendMsg', function(data, callback) {
-    var msg = data.trim();
-    callback(msg);
+  socket.on('sendMsg', function(data) {
+    var msg = data.msg;
+    console.log(msg);
+    io.sockets.emit('newMsg', socket.nickname + ': ' + msg);
+    //callback(msg);
   });
 
 })
@@ -48,7 +58,7 @@ io.on('connection', function(socket) {
 
 
 
-http.listen(3000, function() {
+http.listen(3000, '0.0.0.0', function() {
   console.log('listening on *:3000');
 })
 
