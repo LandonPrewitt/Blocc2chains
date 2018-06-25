@@ -29,6 +29,10 @@ app.get('/main.js', function (req,res) {
   res.sendFile(path.join(__dirname + '/public/main.js'))
 })
 
+app.get('/public/images/iccced.png', function (req,res) {
+  res.sendFile(path.join(__dirname + '/public/images/iccced.png'))
+})
+
 // ================= IO Shortcut / Functions
 
 function updateUserCount() {

@@ -195,3 +195,9 @@ body {
 .message_template {
   display: none;
 }
+
+/* CUSTOM CSS */
+
+#mainBody {
+	background-image: url("/public/images/iccced.png");
+}
