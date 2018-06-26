@@ -4,6 +4,7 @@ var express = require('express'),
     app = express(),
     fs = require('fs'),
     http = require('http').Server(app),
+    https = require('https').Server(app),
     io = require('socket.io')(http, {
       pingTimeout: 5000
     }),
@@ -52,6 +53,7 @@ io.on('connection', function(socket) {
 
   // Assign an ID
   socket.nickname = count;
+  count++;
 
   socket.on('chat message', function(msg) {
     io.emit('chat message', msg);
@@ -65,7 +67,6 @@ io.on('connection', function(socket) {
 
   socket.on('sendMsg', function(data) {
     var msg = data.msg;
-    console.log(msg);
     io.sockets.emit('newMsg', socket.nickname + ': ' + msg);
     //callback(msg);
   });
@@ -74,8 +75,9 @@ io.on('connection', function(socket) {
 
 
 
-
 http.listen(8080, '0.0.0.0', function() {
-  console.log('listening on *:3000');
+  console.log('http listening on *:8080');
 })
+
+
 

@@ -38,6 +38,7 @@ jQuery(function($){
 
 	socket.on('newMsg', function(data) {
 		$msgList.append('<li>' + data + '</li>');
+		$msgList.stop ().animate ({scrollTop: $msgList[0].scrollHeight});
 	});
 
 	socket.on('updateUserCount', function(data) {
