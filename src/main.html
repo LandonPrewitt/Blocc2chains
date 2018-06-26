@@ -11,16 +11,13 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" type="text/css" href="/main.css">
 
-    <!-- Custom Scripts -->
-    <script src="/public/main.js"></script>
-
     <title>Hello, world!</title>
   </head>
 
 
 
   <!-- CHAT INTERFACE (Simple Hello World for setting up backend and getting familiar) -->
-  <body>
+  <body id="mainBody">
     <div class="chat_window">
         <div class="top_menu">
             <div class="buttons">
@@ -28,14 +25,14 @@
                 <div class="button minimize"></div>
                 <div class="button maximize"></div>
             </div>
-            <div class="title">Chat</div>
+            <div class="title">Chat - 0 Online</div>
         </div>
         <ul class="messages"></ul>
         <div class="bottom_wrapper clearfix">
             <div class="message_input_wrapper">
                 <input class="message_input" placeholder="Type your message here..." />
             </div>
-            <div class="send_message">
+            <div class="send_message" id="send_message">
                 <div class="icon"></div>
                 <div class="text">Send</div>
             </div>
@@ -69,10 +66,9 @@
 
     <!-- Socket io -->
     <script src="/socket.io/socket.io.js"></script>
-    <script>
-        var socket = io();
-    </script>
 
+    <!-- Custom Scripts -->
+    <script src="/main.js"></script>
 
   </body>
 </html>
